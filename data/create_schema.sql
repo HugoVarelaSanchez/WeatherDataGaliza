@@ -1,6 +1,8 @@
 -- Base de datos relacional relacionada con los usuarios
-DROP TABLE IF EXISTS usuario;
+-- SQLite3 compatible schema
+
 DROP TABLE IF EXISTS token_login;
+DROP TABLE IF EXISTS usuario;
 
 
 CREATE TABLE usuario(
@@ -23,5 +25,5 @@ CREATE TABLE token_login(
 
     CONSTRAINT FK_tokenL_usuario FOREIGN KEY (email)
     REFERENCES usuario(email)
-
+    ON DELETE CASCADE
 );

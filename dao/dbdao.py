@@ -1,132 +1,109 @@
 import os
-from psycopg2 import pool
+import sqlite3
 from dotenv import load_dotenv
 
 class BaseDAO:
-    """Clase base para gestionar la conexión a PostgreSQL"""
-    
+    """Clase base para gestionar la conexión a SQLite3"""
 
-    # Cargar variables de entorno de .env
-    _connection_pool = None
-    
     load_dotenv()
 
-    _credentials = {"dbname": os.getenv("dbname"),
-                       "user": os.getenv("user"),
-                       "password": os.getenv("password"),
-                       "host": os.getenv("host"),
-                       "port": os.getenv("port")}
+    # Path to SQLite database file
+    _db_path = os.getenv("DB_PATH", "data/hackudc.db")
 
-
-
-
-
-    #Inicializacion del pool de conexion
     @classmethod
-    def init_connection_pool(cls, minconn:int=1, maxconn:int=100):
-        """Inicializar la conexión pool.
+    def init_connection_pool(cls):
+        """Inicializar la base de datos SQLite.
 
-        
-        Permite crear una caché de conexiones de 
-        la base de datos para que se puedan reutilizar
-        y así ahorrar tiempo.
-
-        
-        Parameters
-        ----------
-        minconn: int
-            Conexiones mínimas
-        maxconn: int
-            Conexiones máximas
+        Crea el archivo de base de datos si no existe
+        y aplica el schema inicial.
         """
-        if cls._connection_pool is None:
+        try:
+            # Create data directory if it doesn't exist
+            db_dir = os.path.dirname(cls._db_path)
+            if db_dir and not os.path.exists(db_dir):
+                os.makedirs(db_dir)
+
+            # Initialize database with schema if it doesn't exist
+            if not os.path.exists(cls._db_path):
+                cls._initialize_schema()
+                print(f"Base de datos SQLite creada en: {cls._db_path}")
+            else:
+                print(f"Conectado a base de datos SQLite: {cls._db_path}")
+        except Exception as e:
+            print(f"Error al inicializar la base de datos: {e}")
+
+    @classmethod
+    def _initialize_schema(cls):
+        """Crea el schema inicial de la base de datos"""
+        schema_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'create_schema.sql')
+
+        if os.path.exists(schema_path):
+            with open(schema_path, 'r') as f:
+                schema_sql = f.read()
+
+            conn = sqlite3.connect(cls._db_path)
             try:
-                cls._connection_pool = pool.ThreadedConnectionPool(
-                    minconn, 
-                    maxconn,
-                    **cls._credentials
-                )
+                conn.executescript(schema_sql)
+                conn.commit()
+                print("Schema de base de datos creado exitosamente")
             except Exception as e:
-                print(f"Error al crear el pool de conexiones: {e}")
-                
-    
-
-
+                print(f"Error al crear schema: {e}")
+            finally:
+                conn.close()
 
     def __init__(self):
         self.connection = None
         self.cursor = None
-    
-
-
-
 
     def get_connection(self):
-        """Obtiene una conexión del pool.
-        
-        Busca si existe una conexión ya creada 
-        en el pool de conexiones.
+        """Obtiene una conexión a SQLite.
+
+        Crea una nueva conexión a la base de datos SQLite.
         """
-        if BaseDAO._connection_pool is None:
-            raise Exception("El pool de conexiones no ha sido inicializado")
-        
-        self.connection = BaseDAO._connection_pool.getconn()
+        self.connection = sqlite3.connect(BaseDAO._db_path)
+        # Enable foreign keys
+        self.connection.execute("PRAGMA foreign_keys = ON")
         return self.connection
-    
-
-
-
 
     def return_connection(self):
-        """Devuelve la conexión al pool
-        
-        Una vez utilizado la conexión se 
-        retorna al pool
-        """
-        if self.connection: #Activated
-            BaseDAO._connection_pool.putconn(self.connection)
+        """Cierra la conexión a la base de datos"""
+        if self.connection:
+            self.connection.close()
             self.connection = None
-    
-
-
-
 
     def execute_query(self, query:str, params:list|tuple=None, fetch=True):
-        """Ejecuta una consulta SQL o una operación DDL 
-        
+        """Ejecuta una consulta SQL o una operación DDL
+
         Según el tipo de operación puede devolver un resultado
         o modificar el estado de la base de datos.
 
         Parameters
         ----------
         query: str
-            Consulta a ejecutar
+            Consulta a ejecutar (usar ? como placeholder para SQLite)
         params: list | tuple
-            Parámetros 
-        
+            Parámetros
+
         """
         try:
             self.connection = self.get_connection()
             self.cursor = self.connection.cursor()
-            self.cursor.execute(query, params)
-            
+            self.cursor.execute(query, params if params else ())
+
             if fetch: # Recuperar
                 result = self.cursor.fetchall()
                 if query.strip().upper().startswith(('INSERT', 'UPDATE', 'DELETE')):
-                    self.connection.commit()  # Esta es la línea añadida
+                    self.connection.commit()
                 return result
-            
+
             self.connection.commit()
             return True
         except Exception as e:
             if self.connection:
                 self.connection.rollback()
             print(f"Error al ejecutar consulta: {e}")
+            raise
         finally: # Kill cursor and return connection
             if self.cursor:
                 self.cursor.close()
             self.return_connection()
-
-
-
-

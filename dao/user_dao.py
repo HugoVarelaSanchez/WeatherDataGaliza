@@ -4,7 +4,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 
-
 class usuarioDAO(BaseDAO):
 
 
@@ -17,7 +16,7 @@ class usuarioDAO(BaseDAO):
         query = '''
                 INSERT INTO usuario(email, nombre, contrasenha_hash, telefono)
                 VALUES
-                    (%s, %s, %s, %s)
+                    (?, ?, ?, ?)
                 '''
         return self.execute_query(query, (user_values['email'], user_values['nombre'], user_values['contrasenha_hash'], user_values['telefono']), fetch=False)
 
@@ -34,7 +33,7 @@ class usuarioDAO(BaseDAO):
         query = '''
                 SELECT * 
                 FROM usuario
-                WHERE email = %s
+                WHERE email = ?
                 '''
         
         aux_result = self.execute_query(query, (email,))
@@ -51,12 +50,13 @@ class usuarioDAO(BaseDAO):
 
 
 
+
     def check_credenciales(self, email, contraseña_texto_plano): 
  
         query = '''
                 SELECT contrasenha_hash
                 FROM usuario
-                WHERE email = %s 
+                WHERE email = ? 
                 '''
         
         p_contrasenha_hash_guardada = self.execute_query(query, (email,))
@@ -75,12 +75,13 @@ class usuarioDAO(BaseDAO):
 
 
 
+
     def check_user_exist(self, email):
         
         query = '''
                 SELECT COUNT(*) 
                 FROM usuario
-                WHERE email = %s
+                WHERE email = ?
                 '''
         result = self.execute_query(query, (email,))
         if result:

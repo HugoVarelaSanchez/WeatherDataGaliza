@@ -5,6 +5,7 @@ import json, secrets, os
 from dotenv import load_dotenv
 from dao import *
 from utils import *
+from services import GeminiFileProcessor
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ def fapp():
     usuario_dao = usuarioDAO()
     token_dao = tokenDAO()
     base_dao = BaseDAO()
+    gemini_processor = GeminiFileProcessor()
 
     base_dao.init_connection_pool()
 
@@ -249,6 +251,53 @@ def fapp():
         resp.delete_cookie('login_token')
         return resp
 
+
+    # ============= File Processing Endpoints =============
+
+    @app.route('/api/upload', methods=['POST'])
+    @login_check()
+    def upload_file():
+        """
+        Upload and process a file using Gemini AI
+        Requires authentication
+        """
+        try:
+            file = request.files.get('file')
+
+            if not file or file.filename == '':
+                return jsonify({'success': False, 'error': 'No file selected'}), 400
+
+            result = gemini_processor.process_file(file)
+            return jsonify({'success': True, **result})
+
+        except ValueError as e:
+            return jsonify({'success': False, 'error': str(e)}), 400
+        except Exception as e:
+            return jsonify({'success': False, 'error': f'Processing failed: {str(e)}'}), 500
+
+
+    @app.route('/api/url', methods=['POST'])
+    @login_check()
+    def parse_url():
+        """
+        Validate and save a URL
+        Requires authentication
+        """
+        try:
+            data = request.get_json() if request.is_json else request.form
+            url = data.get('url')
+
+            if not url:
+                return jsonify({'success': False, 'error': 'No URL provided'}), 400
+
+            if gemini_processor.validate_url(url):
+                # TODO: Save URL to database associated with user
+                return jsonify({'success': True, 'valid': True, 'url': url})
+            else:
+                return jsonify({'success': False, 'error': 'Invalid URL format'}), 400
+
+        except Exception as e:
+            return jsonify({'success': False, 'error': str(e)}), 500
 
 
     return app

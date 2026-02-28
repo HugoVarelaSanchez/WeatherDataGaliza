@@ -17,7 +17,7 @@ class tokenDAO(BaseDAO):
         query = '''
                 INSERT INTO token_login(token, email, f_creacion, f_expiracion)
                 VALUES 
-                    (%s, %s, %s, %s)
+                    (?, ?, ?, ?)
                 '''
         return self.execute_query(query, (token_values['token'], token_values['email'], datetime.now(), datetime.now()+timedelta(weeks=2)), fetch=False)
  
@@ -27,7 +27,7 @@ class tokenDAO(BaseDAO):
         
         query = '''
                 DELETE FROM token_login
-                WHERE email = %s
+                WHERE email = ?
                 '''
         self.execute_query(query, (email,), fetch=False)
 
@@ -43,10 +43,11 @@ class tokenDAO(BaseDAO):
 
         query = '''
                 DELETE FROM token_login
-                WHERE email = %s
+                WHERE email = ?
                 '''
         return self.execute_query(query, (email,), fetch=False)
         
+
 
 
 
@@ -55,7 +56,7 @@ class tokenDAO(BaseDAO):
         query = '''
                 SELECT *
                 FROM token_login
-                WHERE email = %s
+                WHERE email = ?
                 '''
         
         p_token_h = self.execute_query(query, (email,))
@@ -83,7 +84,7 @@ class tokenDAO(BaseDAO):
         query = '''
                 SELECT COUNT(*) 
                 FROM token_login
-                WHERE email = %s
+                WHERE email = ?
                 '''
         result = self.execute_query(query, (email,))
         return result[0][0] > 0
