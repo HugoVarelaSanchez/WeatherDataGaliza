@@ -1,0 +1,9 @@
+{
+	"Schema": {
+		"Tables": "SELECT name FROM sqlite_master WHERE type='table'"
+	},
+	"WObservation": {
+		"Empty": "DELETE FROM WeatherObservation",
+		"Get": "SELECT temperature, wind, precipitation_amount FROM WeatherObservation WHERE date = ? AND time = ?"
+	}
+}
