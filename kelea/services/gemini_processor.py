@@ -5,6 +5,7 @@ import time
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from google.genai.types import FileState
 
 load_dotenv()
 
@@ -20,13 +21,21 @@ class GeminiFileProcessor:
     AUDIO_FILES = {"audio/wav", "audio/mp3", "audio/aiff", "audio/aac", "audio/ogg", "audio/flac"}
     SUPPORTED_FILES = TEXT_FILES | VIDEO_FILES | IMAGE_FILES | AUDIO_FILES
 
+
+
     # Regex for detecting a URL
     URL_PATTERN = r"^https?://(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}(/[-a-zA-Z0-9()@:%_\+.~#?&/=]*)?$"
+
+
+
 
     def __init__(self):
         """Initialize Gemini client with API key from environment"""
         self.client = genai.Client(api_key=os.getenv("API_GEMINI"))
         self.prompt_path = os.path.join(os.path.dirname(__file__), "prompt.txt")
+
+
+
 
     def _load_prompt(self):
         """Load the prompt template from file"""
@@ -44,9 +53,60 @@ class GeminiFileProcessor:
         else:
             return base_prompt
 
+
+    def process_file_from_path(self, file_path: str, mime_type: str, filename: str) -> dict:
+        """
+        Process a file already saved on disk using Gemini API.
+
+        Args:
+            file_path: Absolute or relative path to the file on disk
+            mime_type: MIME type of the file
+            filename: Original filename (for the returned dict)
+
+        Returns:
+            dict: Contains filename, content (extracted data), and mime_type
+
+        Raises:
+            ValueError: If file type is not supported
+            Exception: If processing fails
+        """
+        if mime_type not in self.SUPPORTED_FILES:
+            raise ValueError(f"Unsupported file type: {mime_type}. Supported types: {', '.join(self.SUPPORTED_FILES)}")
+
+        prompt = self._load_prompt()
+
+        gemini_file = self.client.files.upload(file=file_path, config=types.UploadFileConfig(mime_type=mime_type))
+
+        while gemini_file.state not in (FileState.ACTIVE, FileState.FAILED):
+            time.sleep(2.5)
+            gemini_file = self.client.files.get(name=gemini_file.name)
+
+        if gemini_file.state == FileState.FAILED:
+            raise Exception("File processing failed on Gemini's servers")
+
+        custom_prompt = self._get_custom_prompt(mime_type, prompt)
+
+        response = self.client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=[
+                types.Part(file_data=types.FileData(file_uri=gemini_file.uri)),
+                types.Part(text=custom_prompt)
+            ],
+            config=types.GenerateContentConfig(
+                system_instruction="You are a precise data extraction assistant. Do not summarize; extract facts accurately."
+            )
+        )
+
+        return {
+            "filename": filename,
+            "content": response.text,
+            "mime_type": mime_type
+        }
+
     def process_file(self, file):
         """
-        Process and parse the file using Gemini 2.5-flash model.
+        Process and parse the file using Gemini API.
+        Saves to a temporary file, processes it, then cleans up.
 
         Args:
             file: File object from Flask request
@@ -63,56 +123,14 @@ class GeminiFileProcessor:
         try:
             file_type = file.content_type
 
-            # Validate file type
-            if file_type not in self.SUPPORTED_FILES:
-                raise ValueError(f"Unsupported file type: {file_type}. Supported types: {', '.join(self.SUPPORTED_FILES)}")
-
-            # Read prompt file
-            prompt = self._load_prompt()
-
             ext = os.path.splitext(file.filename)[1]
-            # Based on the detected extension create a temp. file with the same extension
             with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as temp_file:
                 file.save(temp_file.name)
                 temp_path = temp_file.name
 
-            # Upload file to Gemini with proper MIME type
-            gemini_file = self.client.files.upload(path=temp_path, config={"mime_type": file_type})
-
-            # Wait for file to become active (required for video/audio files)
-            while gemini_file.state == "PROCESSING":
-                time.sleep(1)
-                gemini_file = self.client.files.get(name=gemini_file.name)
-
-            if gemini_file.state == "FAILED":
-                raise Exception("File processing failed on Gemini's servers")
-
-            # Customize prompt based on file type
-            custom_prompt = self._get_custom_prompt(file_type, prompt)
-
-            # Send query to Gemini for parsing the content
-            # gemini-1.5-flash-8b",  # Free tier, lightweight
-            # gemini-1.5-flash",      # Standard free tier
-            # gemini-2.0-flash-exp
-            response = self.client.models.generate_content(
-                model="gemini-2.0-flash",
-                contents=[
-                    types.Part(file_data=types.FileData(file_uri=gemini_file.uri)),
-                    types.Part(text=custom_prompt)
-                ],
-                config=types.GenerateContentConfig(
-                    system_instruction="You are a precise data extraction assistant. Do not summarize; extract facts accurately."
-                )
-            )
-
-            return {
-                "filename": file.filename,
-                "content": response.text,
-                "mime_type": file.content_type
-            }
+            return self.process_file_from_path(temp_path, file_type, file.filename)
 
         finally:
-            # Cleanup the local temp file after upload
             if temp_path and os.path.exists(temp_path):
                 os.remove(temp_path)
 

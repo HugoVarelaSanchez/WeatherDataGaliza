@@ -1,9 +1,11 @@
-from flask import Flask, flash, session,  redirect, url_for, jsonify, request, render_template
+from flask import Flask, flash, session, redirect, url_for, jsonify, request, render_template, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from functools import wraps
 import json, secrets, os
 from dotenv import load_dotenv
 from dao import *
+from dao.db_mongoDAO import BaseMongoDAO
 from utils import *
 from services import GeminiFileProcessor
 
@@ -27,6 +29,8 @@ def fapp():
     gemini_processor = GeminiFileProcessor()
 
     base_dao.init_connection_pool()
+    BaseMongoDAO.init_connection()
+    documentos_dao = DocumentosDAO()
 
     def login_check():
         def login_check_real(f):
@@ -55,7 +59,7 @@ def fapp():
                         
                             
                             check = token_dao.check_token(n_email, n_token)
-                            
+
 
                             #Compruebas si ese token es valido con ese email
                             if check:                        #Inicias sesion
@@ -68,24 +72,26 @@ def fapp():
                                     'user_name': usuario_activo[0]['nombre'],
                                     'user_phone': usuario_activo[0]['telefono'],
                                 }
-                            
-                                session.update(session_data) 
 
-                                
+                                session.update(session_data)
 
                                 token = secrets.token_hex(32)
                                 token_dao.update_token(token, n_email)
-                                
-                                resp = redirect(url_for('index'))
+
+                                # Ejecutar el endpoint real y añadir la cookie rotada
+                                resp = make_response(f(*args, **kwargs))
                                 resp.set_cookie(
-                                    'login_token', 
-                                    json.dumps({'token': token, 'email': n_email}),  
-                                    max_age=2592000, 
-                                    httponly=True, 
+                                    'login_token',
+                                    json.dumps({'token': token, 'email': n_email}),
+                                    max_age=2592000,
+                                    httponly=True,
                                     secure=True
                                 )
 
                                 return resp
+
+                            # Token inválido: redirigir a login
+                            return redirect(url_for('login'))
                         
 
 
@@ -152,11 +158,8 @@ def fapp():
                 if request.form.get('remember'):
 
                     token = secrets.token_hex(32)
-                    token_autenticacion = token_dao.check_user(email)
+                    token_dao.update_token(token, email)
 
-                    if token_autenticacion:
-                        token_dao.update_token(token, email)
-                
                     resp = redirect(url_for('index'))
                     resp.set_cookie(
                         'login_token', 
@@ -267,7 +270,41 @@ def fapp():
             if not file or file.filename == '':
                 return jsonify({'success': False, 'error': 'No file selected'}), 400
 
-            result = gemini_processor.process_file(file)
+            # Determinar tipo para MongoDB
+            mime = file.content_type
+            if mime.startswith('image/'):
+                tipo = 'imagen'
+            elif mime.startswith('video/'):
+                tipo = 'video'
+            elif mime.startswith('audio/'):
+                tipo = 'audio'
+            else:
+                tipo = 'documento'
+
+            # Guardar el archivo en el directorio del usuario
+            user_email = session['user_email']
+            user_dir = crear_path_name(user_email)
+            brutos_dir = os.path.join(user_dir, 'brutos')
+            os.makedirs(brutos_dir, exist_ok=True)
+
+            safe_name = secure_filename(file.filename) or 'archivo'
+            file_path = os.path.join(brutos_dir, safe_name)
+            file.save(file_path)
+
+            # Procesar con Gemini desde la ruta guardada
+            result = gemini_processor.process_file_from_path(file_path, mime, file.filename)
+
+            # Persistir en MongoDB
+            documentos_dao.insert({
+                'email': user_email,
+                'tipo': tipo,
+                'path': file_path,
+                'size': os.path.getsize(file_path),
+                'mime_type': mime,
+                'titulo': file.filename,
+                'descripcion': (result.get('content') or '')[:500],
+            })
+
             return jsonify({'success': True, **result})
 
         except ValueError as e:
@@ -291,7 +328,12 @@ def fapp():
                 return jsonify({'success': False, 'error': 'No URL provided'}), 400
 
             if gemini_processor.validate_url(url):
-                # TODO: Save URL to database associated with user
+                documentos_dao.insert({
+                    'email': session['user_email'],
+                    'tipo': 'enlace',
+                    'url': url,
+                    'titulo': url,
+                })
                 return jsonify({'success': True, 'valid': True, 'url': url})
             else:
                 return jsonify({'success': False, 'error': 'Invalid URL format'}), 400
