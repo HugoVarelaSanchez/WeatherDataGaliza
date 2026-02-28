@@ -1,0 +1,58 @@
+Analyze the provided file thoroughly and extract ALL key information from it.
+Return the result ONLY as a valid JSON object — no markdown, no code fences, no explanation.
+
+Use this exact structure:
+
+{
+  "document": {
+    "metadata": {
+      "title": "",
+      "author": "",
+      "date_created": "",
+      "data_added": "",
+      "language": "",
+      "file_type": "",
+    },
+    "summary": "",
+    "main_topics": [],
+    "content": {
+      "sections": [
+        {
+          "heading": "",
+          "body": ""
+        }
+      ],
+      "tables": [
+        {
+          "title": "",
+          "headers": [],
+          "rows": []
+        }
+      ],
+      "lists": [],
+      "images_description": [],
+      "code_blocks": []
+    },
+    "entities": {
+      "people": [],
+      "organizations": [],
+      "locations": [],
+      "dates": [],
+      "numbers_and_stats": [],
+      "emails": [],
+      "urls": []
+    },
+    "key_value_pairs": {},
+    "sentiment": "",
+    "keywords": [],
+    "notes": ""
+  }
+}
+
+Rules:
+- OMIT any field entirely if its value would be null, empty string, or empty array — do not include it in the output at all.
+- Only include fields that contain actual extracted data from the document.
+- Do NOT invent or assume data that is not explicitly present in the document.
+- Preserve the exact wording for extracted text fields.
+- For spreadsheets or tables, map all rows and columns accurately.
+- For code files, place all code inside code_blocks.
