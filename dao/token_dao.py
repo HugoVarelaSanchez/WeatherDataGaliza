@@ -1,6 +1,6 @@
 from .dbdao import BaseDAO
 from werkzeug.security import check_password_hash, generate_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 
@@ -19,7 +19,7 @@ class tokenDAO(BaseDAO):
                 VALUES 
                     (%s, %s, %s, %s)
                 '''
-        return self.execute_query(query, (token_values.email, token_values.nombre, datetime.datetime.now(), datetime.datetime.now()+datetime.timedelta(weeks=2)), fetch=False)
+        return self.execute_query(query, (token_values['token'], token_values['email'], datetime.now(), datetime.now()+timedelta(weeks=2)), fetch=False)
  
 
 

@@ -2,18 +2,23 @@ from flask import Flask, flash, session,  redirect, url_for, jsonify, request, r
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import json, secrets
+from dotenv import load_dotenv
 from dao import *
 from utils import *
 
-def app():
+load_dotenv()
 
 
+def fapp():
+
+    
     app = Flask(__name__)
 
     app.config['DEBUG'] = True
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-    app.config['SESSION_COOKIE_NAME'] = 'hackudc25'         
+    app.config['SESSION_COOKIE_NAME'] = 'hackudc25'
+    app.secret_key = secrets.token_hex(32)  # TODO: mover a variable de entorno en producción
 
     usuario_dao = usuarioDAO()
     token_dao = tokenDAO()
@@ -42,7 +47,7 @@ def app():
                                 return redirect(url_for('login'))
                         
                             
-                            check = tokenDAO.check_token(n_email, n_token)
+                            check = token_dao.check_token(n_email, n_token)
                             
 
                             #Compruebas si ese token es valido con ese email
@@ -53,8 +58,8 @@ def app():
 
                                 session_data = {
                                     'user_email': n_email,
-                                    'user_name': usuario_activo['nombre'],
-                                    'user_phone': usuario_activo['telefono'],
+                                    'user_name': usuario_activo[0]['nombre'],
+                                    'user_phone': usuario_activo[0]['telefono'],
                                 }
                             
                                 session.update(session_data) 
@@ -79,18 +84,13 @@ def app():
 
 
                     #Si hay un email guardado en la sesion
-                    #Verificamos que todo esta bien
+                    #Verificamos que el usuario existe en la BD
                     else:
                         user = usuario_dao.get_user(session['user_email'])
-                        
+
                         #Si no esta guardado ese email, error
                         if not user:
                             flash(f'No existe ningun usuario con el email: {session["user_email"]}', 'error')
-                            session.clear()
-                            return redirect(url_for('login'))
-                        
-                        token_almacenado = session.get('auth_token')
-                        if not token_dao.check_token(session['user_email'], token_almacenado):
                             session.clear()
                             return redirect(url_for('login'))
                     
@@ -116,8 +116,7 @@ def app():
         if request.method == 'POST': 
             
             email = request.form.get('email')
-            passwor = request.form.get('password')
-
+            
             existencia, checkeo = usuario_dao.check_user_exist(email), False
 
 
@@ -128,12 +127,12 @@ def app():
                 return render_template('login.html', error='Usuario no registrado')
 
             if checkeo:
-                usuario_activo = usuario_dao.get_user_cod(email)
-                
+                usuario_activo = usuario_dao.get_user(email)
+
                 session_data = {
                     'user_email': email,
-                    'user_name': usuario_activo['nombre'],
-                    'user_phone': usuario_activo['telefono'],
+                    'user_name': usuario_activo[0]['nombre'],
+                    'user_phone': usuario_activo[0]['telefono'],
                     }
         
                 session.update(session_data)
@@ -176,7 +175,7 @@ def app():
             email = request.form.get('email') 
 
             user = usuario_dao.get_user(email)
-            if user is not None:
+            if user:
                 return render_template('register.html', error='Este usuario ya esta registrado')
 
 
@@ -222,8 +221,18 @@ def app():
 
 
 
-    @login_check
     @app.route('/index', methods=['GET', 'POST'])
+    @login_check()
     def index():
-        pass
+        return render_template('login.html')  # Simplemente un 'Esto funciona'
+
+
+app = fapp()
+
+if __name__ == '__main__':
+    app.run(debug=True, host='localhost', port=5000)
+
+
+
+
 

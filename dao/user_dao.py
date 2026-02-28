@@ -15,11 +15,11 @@ class usuarioDAO(BaseDAO):
     def insert_user(self, user_values:dict):
 
         query = '''
-                INSERT INTO usuario(email, nombre, contrasenha_hash, telefono
-                VALUES 
+                INSERT INTO usuario(email, nombre, contrasenha_hash, telefono)
+                VALUES
                     (%s, %s, %s, %s)
                 '''
-        return self.execute_query(query, (user_values.email, user_values.nombre, user_values.contrasenha, user_values.telefono), fetch=False)
+        return self.execute_query(query, (user_values['email'], user_values['nombre'], user_values['contrasenha_hash'], user_values['telefono']), fetch=False)
 
 
 
@@ -76,12 +76,11 @@ class usuarioDAO(BaseDAO):
 
 
     def check_user_exist(self, email):
-
-        query = '''
-                SELECT *
-                FROM usuario
-                WHERE email=%s
-                '''
         
+        query = '''
+                SELECT COUNT(*) 
+                FROM usuario
+                WHERE email = %s
+                '''
         result = self.execute_query(query, (email,))
-        return result[0][0]>0
+        return result[0][0] > 0 

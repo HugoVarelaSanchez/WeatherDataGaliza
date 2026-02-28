@@ -1,12 +1,15 @@
 -- Base de datos relacional relacionada con los usuarios
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS token_login;
+
 
 CREATE TABLE usuario(
     email VARCHAR(50) NOT NULL,
     nombre VARCHAR(50) NOT NULL, 
     contrasenha_hash TEXT NOT NULL,
-    telefono int(9), 
+    telefono INTEGER,
 
-    CONSTRAINT PK_usuario PRIMARY KEY email
+    CONSTRAINT PK_usuario PRIMARY KEY (email)
 );
 
 
