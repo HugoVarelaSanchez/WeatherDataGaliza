@@ -1,7 +1,7 @@
 from flask import Flask, flash, session,  redirect, url_for, jsonify, request, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
-import json, secrets
+import json, secrets, os
 from dotenv import load_dotenv
 from dao import *
 from utils import *
@@ -12,17 +12,19 @@ load_dotenv()
 def fapp():
 
     
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='web/templates', static_folder='web/static')
 
     app.config['DEBUG'] = True
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
     app.config['SESSION_COOKIE_NAME'] = 'hackudc25'
-    app.secret_key = secrets.token_hex(32)  # TODO: mover a variable de entorno en producción
+    app.secret_key = os.getenv('SECRET_KEY', secrets.token_hex(32))
 
     usuario_dao = usuarioDAO()
     token_dao = tokenDAO()
+    base_dao = BaseDAO()
 
+    base_dao.init_connection_pool()
 
     def login_check():
         def login_check_real(f):
@@ -36,9 +38,12 @@ def fapp():
                         auth_token = request.cookies.get('login_token')
 
 
+                        if not auth_token:
+                            return redirect(url_for('login'))
+
                         if auth_token:
-                            
-                            try: 
+
+                            try:
                                 login_data = json.loads(auth_token)
                                 n_token = login_data.get('token')
                                 n_email = login_data.get('email')
@@ -109,6 +114,11 @@ def fapp():
 
 
 
+
+    @app.route('/')
+    @login_check()
+    def root():
+        return redirect(url_for('index'))
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -185,6 +195,8 @@ def fapp():
                 return render_template('register.html', error='Debes anhadir un nombre de usuario')
             
             telefono = request.form.get('phone')
+            if not telefono:
+                telefono = None
 
             contrasenha = request.form.get('contrasenha')
             check_contra = request.form.get('contrasenha_confirm')
@@ -224,8 +236,22 @@ def fapp():
     @app.route('/index', methods=['GET', 'POST'])
     @login_check()
     def index():
-        return render_template('login.html')  # Simplemente un 'Esto funciona'
+        return render_template('index.html')
 
+
+
+
+
+    @app.route('/logout')
+    def logout():
+        session.clear()
+        resp = redirect(url_for('login'))
+        resp.delete_cookie('login_token')
+        return resp
+
+
+
+    return app
 
 app = fapp()
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="card">
+        <h1>Bienvenido, {{ session['user_name'] }}</h1>
+
+        <div class="info">
+            <p><strong>Email:</strong> {{ session['user_email'] }}</p>
+            <p><strong>Teléfono:</strong> {{ session['user_phone'] or 'No especificado' }}</p>
+        </div>
+
+        <a class="logout" href="/logout">Cerrar sesión</a>
+    </div>
+</body>
+</html>

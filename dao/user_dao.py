@@ -38,7 +38,7 @@ class usuarioDAO(BaseDAO):
                 '''
         
         aux_result = self.execute_query(query, (email,))
-        if len(aux_result) == 0:
+        if not aux_result:
                 return []
         else:
             result = []
@@ -83,4 +83,6 @@ class usuarioDAO(BaseDAO):
                 WHERE email = %s
                 '''
         result = self.execute_query(query, (email,))
-        return result[0][0] > 0 
+        if result:
+            return result[0][0] > 0 
+        return False
