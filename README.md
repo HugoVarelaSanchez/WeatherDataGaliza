@@ -1,7 +1,7 @@
 # WeatherDataGaliza Dashboard
 # Panel de monitorización meteorológica adaptado a tu ubicación actual
 
-Conocer el tiempo que hará en los próximos días debería ser inmediato, independientemente de dónde te encuentres. **WeatherDataGaliza** es un sistema de visualización meteorológica que detecta tu ubicación actual mediante tu dirección IP, consulta la previsión de MeteoGalicia para tus coordenadas y la presenta en un dashboard interactivo de Grafana, todo de manera automática.
+Conocer el tiempo que hará en los próximos días debería ser inmediato, independientemente de dónde te encuentres. **WeatherDataGaliza** es un sistema de visualización meteorológica que detecta tu ubicación actual mediante tu dirección IP, consulta la previsión de MeteoGalicia para tus coordenadas y la presenta tanto en un dashboard interactivo de Grafana como a través de un bot de Telegram, todo de manera automática.
 
 El proyecto surge en el contexto del **HackUDC 2026** con el objetivo de eliminar la fricción entre los datos meteorológicos técnicos y el usuario final: sin configuración manual de coordenadas, sin formatos difíciles de interpretar.
 
@@ -90,6 +90,41 @@ Tres paneles apilados verticalmente a pantalla completa muestran la evolución h
 <img alt = "when_go_outside" width = 600 src = 'images/when_go_outside.png'>
 
 
+#### BOT DE TELEGRAM
+
+Como interfaz complementaria al dashboard, el bot de Telegram permite consultar el estado meteorológico actual de forma instantánea desde cualquier dispositivo, sin necesidad de abrir Grafana.
+
+El bot lee el archivo `sample_data.csv` y localiza la fila correspondiente a la hora en curso (redondeada al inicio de la hora), devolviendo un mensaje formateado con las variables más relevantes para el usuario:
+
+<table>
+  <tr>
+    <th>Campo</th>
+    <th>Descripción</th>
+  </tr>
+  <tr>
+    <td>☁️ Cielo</td>
+    <td>Estado del cielo en lenguaje natural</td>
+  </tr>
+  <tr>
+    <td>🌡️ Temperatura</td>
+    <td>Temperatura actual en °C</td>
+  </tr>
+  <tr>
+    <td>💨 Viento</td>
+    <td>Velocidad del viento en m/s</td>
+  </tr>
+  <tr>
+    <td>💧 Lluvia</td>
+    <td>Precipitación acumulada en mm</td>
+  </tr>
+</table>
+
+Los comandos disponibles son:
+
+- `/start` — Inicia el bot y devuelve el tiempo actual.
+- `/tiempo` — Consulta el tiempo para la hora en curso.
+- `/ahora` — Alias de `/tiempo`.
+
 ## <u>Librerías principales</u>
 
 <table>
@@ -117,6 +152,11 @@ Tres paneles apilados verticalmente a pantalla completa muestran la evolución h
     <td>requests</td>
     <td>2.32.5</td>
     <td>Comunicación HTTP con las APIs externas</td>
+  </tr>
+  <tr>
+    <td>telebot</td>
+    <td>0.0.5</td>
+    <td>Creación y gestión del bot de Telegram</td>
   </tr>
 </table>
 
@@ -158,6 +198,7 @@ Crea un archivo `.env` en la raíz del proyecto con las siguientes claves:
 ```
 API_MG=<tu_api_key_de_meteogalicia>
 API_IP=<tu_api_key_de_ipgeolocation>
+API_TG=<tu_token_del_bot_de_telegram>
 ```
 
 ---
