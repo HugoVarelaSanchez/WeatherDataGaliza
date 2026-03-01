@@ -7,8 +7,7 @@ location.
 */
 CREATE TABLE WeatherObservation(
     num INTEGER,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
+    timestamp DATE NOT NULL,
     sky_state VARCHAR NOT NULL,
     temperature NUMERIC NOT NULL,
     wind NUMERIC NOT NULL,

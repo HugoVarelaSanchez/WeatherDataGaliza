@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 from dotenv import load_dotenv
@@ -12,7 +12,7 @@ ENDPOINT = "https://servizos.meteogalicia.gal/apiv5/"
 WVARIABLES = "sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level"
 
 format_isodate = lambda date: (
-    datetime.fromisoformat(date).strftime("%Y-%m-%d %H:%M:%S").split())
+    datetime.fromisoformat(date).strftime("%Y-%m-%d %H:%M:%S"))
 
 
 class WeatherForecastService(ExternalAPIService):
@@ -50,16 +50,17 @@ class WeatherForecastService(ExternalAPIService):
             tuple[list[tuple[str, str, float, float, float]], str]
                 Weather data in one table
         """
-        get_cols = lambda wvar: ["date", "time", wvar]
+        get_cols = lambda wvar: ["timestamp", wvar]
 
         wvar = WVARIABLES.split(",")
         df_weather = pd.DataFrame(data[wvar[0]], columns=get_cols(wvar[0]))
 
         for var in wvar[1:]:
             wdata = data[var]
+            if var == "sky_state": wdata = data[var].apply(lambda x: x.replace("_", ""))
             df_weather = pd.merge(left=df_weather,
                                   right=pd.DataFrame( wdata, columns=get_cols(var) ),
-                                  on = ["date", "time"]
+                                  on = ["timestamp"]
                                   )
 
         return df_weather
@@ -90,9 +91,9 @@ class WeatherForecastService(ExternalAPIService):
                 for var in entry: # var \in [temperature, wind, precipitation_amount]
                     vname = var["name"] # variable name
                     for v in var["values"]: # The variable values for each day
-                        date, time = format_isodate(v["timeInstant"])
+                        timestamp = format_isodate(v["timeInstant"])
                         value = v["value"] if vname != "wind" else v["moduleValue"]
-                        db_wdata[vname].append((date, time, value))
+                        db_wdata[vname].append((timestamp, value))
 
         # For caching. It could be used any wvariable to obtain the end date.
         end_date = db_wdata["temperature"][-1]
@@ -103,7 +104,7 @@ class WeatherForecastService(ExternalAPIService):
 
         return db_wdata, end_date
 
-    def get_data(self, coords:str, start_time: str) -> dict:
+    def get_data(self, coords:str, start_time: str, end_time:str) -> dict:
         """
         Get the temperature, wind and precipitation forescasts from a
         given coordinates (format: "long,lat") for the next 7 days.
@@ -113,15 +114,19 @@ class WeatherForecastService(ExternalAPIService):
                 Coordinates which we want to know the temperature (long, lan).
             start_time: str
                 From that moment on, the data is recovered.
+            end_time: str
+                Limit data for recovering the weather data.
 
         Return
             dict
                 Weather data together to expire date.
         """
+
         params = {"API_KEY": self.api_key,
                   "variables": WVARIABLES,
                   "coords": coords,
-                  "startTime": start_time}
+                  "startTime": start_time,
+                  "endTime": end_time}
 
         response = requests.get(self.endpoint + "getNumericForecastInfo",
                                 params=params)
@@ -136,8 +141,9 @@ if __name__ == "__main__":
     api = os.getenv("API_MG")
     wfs = WeatherForecastService(api)
     start_time = datetime.now().strftime("%Y-%m-%dT%H:00:00")
+    end_time  = (datetime.now() + timedelta(days=7))# Week data.
 
-    response = wfs.get_data('-8.41039,43.36376', start_time=start_time)
+    response = wfs.get_data('-8.41039,43.36376', start_time=start_time, end_time=end_time)
 
     # Process data
     db_wdata, end_date = wfs._process_data(response)

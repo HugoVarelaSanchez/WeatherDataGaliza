@@ -1,7 +1,9 @@
+from datetime import datetime
 import json
 import os
-import pandas as pd
 import sqlite3
+
+import pandas as pd
 
 
 class WeatherDB:
@@ -139,5 +141,11 @@ class WeatherDB:
         WeatherObservation table when either the end date is expired, the location has changed, or the app was initialized for the first time.
         """
         self._manage_conn()
+        # Save files
         data.to_sql("WeatherObservation", con=self.conn, if_exists="replace")
+        data.to_csv("weather_data.csv")
         self._manage_conn(close=True)
+
+if __name__ == "__main__":
+    db = WeatherDB()
+    data = db.execute_query(sql_keys=("WObservation", "AllData"),read=True)

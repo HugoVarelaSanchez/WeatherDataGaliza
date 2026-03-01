@@ -1,6 +1,6 @@
 #!./venv/bin/python3
 
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 import os
 
 from dotenv import load_dotenv
@@ -67,28 +67,13 @@ class WeatherApp:
                 Weather data expire date.
         """
         start_time = NOW.strftime("%Y-%m-%dT%H:00:00")
-        wrecords = self.weatherService.get_data(coords, start_time) # Weather records
+        end_time = (NOW + timedelta(days=2)).strftime("%Y-%m-%dT%H:00:00")
+        wrecords = self.weatherService.get_data(coords, start_time, end_time) # Weather records
 
         self.weatherDB.execute_query(sql_keys=("WObservation", "Empty"))
         self.weatherDB.insert_wobservations(data=wrecords["data"])
 
         return wrecords["expires_at"]
-
-    def update_wdata(self):
-        """
-        Get the weather data for the current hour, and write it into a
-        file that can be read from the Polybar config file.
-        """
-        # 1) Get my current datetime.
-        date_part = NOW.date().strftime("%Y-%m-%d")
-        time_part = time(NOW.hour, 0, 0).strftime("%H:%M:%S")
-
-        # 2) Use them to retrieve the weather data.
-        db = WeatherDB()
-        wdata: list[tuple[int]] = db.execute_query(sql_keys=("WObservation", "Get"),
-                                                parameters=(date_part, time_part),
-                                                read=True)
-        wdata = ",".join( map(str, wdata[0]) )
 
 
     def run(self):
@@ -113,9 +98,6 @@ class WeatherApp:
             print("The location has changed and/or the data has expired. Updating DB...")
         else:
             print("NO ACTION: The location was not changed, or the weather data didn't expire!")
-
-        # 5) It will retrieve the current weather data.
-        self.update_wdata()
 
 
 if __name__ == "__main__":
