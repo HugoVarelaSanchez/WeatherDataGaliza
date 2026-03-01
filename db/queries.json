@@ -4,6 +4,6 @@
 	},
 	"WObservation": {
 		"Empty": "DELETE FROM WeatherObservation",
-		"Get": "SELECT temperature, wind, precipitation_amount FROM WeatherObservation WHERE date = ? AND time = ?"
+		"Get": "SELECT sky_state, temperature, wind, precipitation_amount, relative_humidity, air_pressure_at_sea_level FROM WeatherObservation WHERE date = ? AND time = ?"
 	}
 }

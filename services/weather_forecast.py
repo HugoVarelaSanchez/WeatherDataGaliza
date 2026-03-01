@@ -9,7 +9,7 @@ from services.api_service import ExternalAPIService, format_json
 
 
 ENDPOINT = "https://servizos.meteogalicia.gal/apiv5/"
-WVARIABLES = "temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level"
+WVARIABLES = "sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level"
 
 format_isodate = lambda date: (
     datetime.fromisoformat(date).strftime("%Y-%m-%d %H:%M:%S").split())
