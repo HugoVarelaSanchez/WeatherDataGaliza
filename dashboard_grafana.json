@@ -1,0 +1,1927 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "El dashboard de información meteorológica de acorde a tus coordendas actuales en Galiia fue creada",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "panels": [],
+      "title": "Your Week Summary 📊",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "relative_humidity"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 13,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Check out how the weather changes in your location 🔍",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "air_pressure_at_sea_level"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "precipitation_amount"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "relative_humidity"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "temperature"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "timestamp"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "wind"
+              },
+              {}
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 13,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "displayLabels": [
+          "percent",
+          "name"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent",
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "sort": "desc",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\r\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\r\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\r\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\r\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\r\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\r\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\r\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\r\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\r\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\r\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\r\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\r\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\r\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\r\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\r\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\r\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\r\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\r\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\r\n18,2026-03-01 23:00:00,Other,11,14.35,0.0,70.27,1013\r\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\r\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\r\n21,2026-03-02 02:00:00,Other,11,16.75,0.0,78.51,1012\r\n22,2026-03-02 03:00:00,Other,11,20.4,0.0,75.93,1010\r\n23,2026-03-02 04:00:00,Other,11,16.42,0.0,70.65,1010\r\n24,2026-03-02 05:00:00,Other,11,18.66,0.0,70.04,1010\r\n25,2026-03-02 06:00:00,Other,11,19.44,0.0,74.16,1009\r\n26,2026-03-02 07:00:00,Other,11,18.28,0.0,75.64,1009\r\n27,2026-03-02 08:00:00,Other,11,16.15,0.0,77.29,1008\r\n28,2026-03-02 09:00:00,Other,11,15.67,0.24,80.43,1009\r\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\r\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\r\n31,2026-03-02 12:00:00,Other,9,19.29,1.76,87.74,1012\r\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\r\n33,2026-03-02 14:00:00,Other,9,12.96,2.96,89.44,1012\r\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\r\n35,2026-03-02 16:00:00,Other,9,14.23,1.82,80.21,1013\r\n36,2026-03-02 17:00:00,Other,9,7.99,1.32,87.24,1013\r\n37,2026-03-02 18:00:00,Other,9,12.8,3.95,90.85,1013\r\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\r\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\r\n40,2026-03-02 21:00:00,Other,9,7.5,0.54,90.64,1015\r\n41,2026-03-02 22:00:00,Other,9,6.62,0.97,93.89,1015\r\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\r\n43,2026-03-03 00:00:00,Other,9,14.04,0.0,89.13,1015\r\n44,2026-03-03 01:00:00,Other,10,12.95,0.0,91.49,1015\r\n45,2026-03-03 02:00:00,Other,10,11.34,0.34,92.2,1015\r\n46,2026-03-03 03:00:00,Other,10,5.74,0.44,92.91,1015\r\n47,2026-03-03 04:00:00,Other,10,8.74,0.0,88.95,1015\r\n48,2026-03-03 05:00:00,Other,10,10.7,0.0,90.12,1016\r\n",
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Sky State Distribution This Week ☁️",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "sky_state": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {
+            "nameField": "sky_state",
+            "valueField": "sky_state (count)"
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "panels": [],
+      "title": "How we are today? 📌",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "dark-green",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 0,
+        "y": 10
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Temperature 🌡",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "temperature"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-orange",
+                "value": 20
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 7,
+        "y": 10
+      },
+      "id": 6,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Wind velocity 💨",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "wind"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#a3b1a1",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 13,
+        "y": 10
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^sky_state$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Sky State ☁️",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "wind"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 2.5
+              },
+              {
+                "color": "dark-orange",
+                "value": 5
+              },
+              {
+                "color": "dark-red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "L/m2"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 0,
+        "y": 15
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Precipitation amount 🌧",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "precipitation_amount"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-orange",
+                "value": 500
+              },
+              {
+                "color": "dark-yellow",
+                "value": 750
+              },
+              {
+                "color": "dark-green",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "pressurehpa"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 7,
+        "y": 15
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Air Pressure At Level 🌬",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "air_pressure_at_sea_level"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-green",
+                "value": 40
+              },
+              {
+                "color": "dark-blue",
+                "value": 60
+              },
+              {
+                "color": "dark-purple",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 13,
+        "y": 15
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,sky_state,temperature,wind,precipitation_amount,relative_humidity,air_pressure_at_sea_level\n0,2026-03-01 05:00:00,PARTLY_CLOUDY,6,2.77,0.0,94.82,1024\n1,2026-03-01 06:00:00,PARTLY_CLOUDY,6,4.84,0.0,92.83,1024\n2,2026-03-01 07:00:00,PARTLY_CLOUDY,6,5.21,0.0,94.11,1023\n3,2026-03-01 08:00:00,PARTLY_CLOUDY,5,4.24,0.0,94.16,1023\n4,2026-03-01 09:00:00,SUNNY,6,3.04,0.0,88.99,1023\n5,2026-03-01 10:00:00,SUNNY,10,3.48,0.0,68.53,1023\n6,2026-03-01 11:00:00,PARTLY_CLOUDY,13,8.6,0.0,53.64,1022\n7,2026-03-01 12:00:00,SUNNY,15,7.04,0.0,48.54,1021\n8,2026-03-01 13:00:00,SUNNY,16,10.65,0.0,43.45,1021\n9,2026-03-01 14:00:00,SUNNY,17,11.93,0.0,43.75,1019\n10,2026-03-01 15:00:00,SUNNY,16,10.46,0.0,50.02,1019\n11,2026-03-01 16:00:00,SUNNY,17,13.03,0.0,42.23,1018\n12,2026-03-01 17:00:00,SUNNY,16,17.17,0.0,46.31,1017\n13,2026-03-01 18:00:00,SUNNY,15,12.54,0.0,51.52,1016\n14,2026-03-01 19:00:00,SUNNY,13,3.42,0.0,64.49,1016\n15,2026-03-01 20:00:00,SUNNY,10,3.78,0.0,71.81,1016\n16,2026-03-01 21:00:00,PARTLY_CLOUDY,11,13.17,0.0,67.46,1015\n17,2026-03-01 22:00:00,PARTLY_CLOUDY,11,10.55,0.0,71.97,1015\n18,2026-03-01 23:00:00,CLOUDY,11,14.35,0.0,70.27,1013\n19,2026-03-02 00:00:00,PARTLY_CLOUDY,11,10.15,0.0,72.67,1013\n20,2026-03-02 01:00:00,PARTLY_CLOUDY,11,20.78,0.0,73.64,1013\n21,2026-03-02 02:00:00,OVERCAST,11,16.75,0.0,78.51,1012\n22,2026-03-02 03:00:00,OVERCAST,11,20.4,0.0,75.93,1010\n23,2026-03-02 04:00:00,CLOUDY,11,16.42,0.0,70.65,1010\n24,2026-03-02 05:00:00,CLOUDY,11,18.66,0.0,70.04,1010\n25,2026-03-02 06:00:00,OVERCAST,11,19.44,0.0,74.16,1009\n26,2026-03-02 07:00:00,CLOUDY,11,18.28,0.0,75.64,1009\n27,2026-03-02 08:00:00,OVERCAST,11,16.15,0.0,77.29,1008\n28,2026-03-02 09:00:00,WEAK_SHOWERS,11,15.67,0.24,80.43,1009\n29,2026-03-02 10:00:00,OVERCAST_AND_SHOWERS,10,21.52,1.26,91.22,1010\n30,2026-03-02 11:00:00,OVERCAST_AND_SHOWERS,9,17.25,1.73,89.78,1011\n31,2026-03-02 12:00:00,WEAK_RAIN,9,19.29,1.76,87.74,1012\n32,2026-03-02 13:00:00,OVERCAST_AND_SHOWERS,9,14.61,1.83,86.08,1013\n33,2026-03-02 14:00:00,RAIN,9,12.96,2.96,89.44,1012\n34,2026-03-02 15:00:00,OVERCAST_AND_SHOWERS,9,19.39,1.91,82.62,1012\n35,2026-03-02 16:00:00,WEAK_SHOWERS,9,14.23,1.82,80.21,1013\n36,2026-03-02 17:00:00,WEAK_SHOWERS,9,7.99,1.32,87.24,1013\n37,2026-03-02 18:00:00,RAIN,9,12.8,3.95,90.85,1013\n38,2026-03-02 19:00:00,OVERCAST_AND_SHOWERS,9,9.16,4.2,90.3,1014\n39,2026-03-02 20:00:00,OVERCAST_AND_SHOWERS,9,9.63,0.82,90.67,1014\n40,2026-03-02 21:00:00,DRIZZLE,9,7.5,0.54,90.64,1015\n41,2026-03-02 22:00:00,DRIZZLE,9,6.62,0.97,93.89,1015\n42,2026-03-02 23:00:00,OVERCAST_AND_SHOWERS,9,9.41,2.16,92.06,1016\n43,2026-03-03 00:00:00,CLOUDY,9,14.04,0.0,89.13,1015\n44,2026-03-03 01:00:00,OVERCAST,10,12.95,0.0,91.49,1015\n45,2026-03-03 02:00:00,DRIZZLE,10,11.34,0.34,92.2,1015\n46,2026-03-03 03:00:00,DRIZZLE,10,5.74,0.44,92.91,1015\n47,2026-03-03 04:00:00,OVERCAST,10,8.74,0.0,88.95,1015\n48,2026-03-03 05:00:00,CLOUDY,10,10.7,0.0,90.12,1016\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Relative humidity 💧",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "relative_humidity"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "regex",
+                  "options": {
+                    "value": "^2026-03-01"
+                  }
+                },
+                "fieldName": "timestamp"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Daily Forecast Outlook 📅",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "min_temp"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Min Temp"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max_temp"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Max Temp"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 11,
+      "options": {
+        "barRadius": 0.1,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xField": "date",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",date,min_temp,max_temp\n0,2026-03-01,5.0,17.0\n1,2026-03-02,9.0,11.0\n2,2026-03-03,9.0,10.0\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Daily Temperature Range 🌡",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "min_temp"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "max_temp"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "bar"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 5
+              },
+              {
+                "color": "dark-orange",
+                "value": 15
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "lengthmm"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_precip"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total Rainfall"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 12,
+      "options": {
+        "barRadius": 0.1,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "date",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",date,total_precip\n0,2026-03-01,0.0\n1,2026-03-02,27.47\n2,2026-03-03,0.78\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Daily Total Rainfall 🌧",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "total_precip"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "bar"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-orange",
+                "value": 20
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "max_wind"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Max Wind Speed"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "id": 13,
+      "options": {
+        "barRadius": 0.1,
+        "barWidth": 0.7,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "date",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",date,max_wind\n0,2026-03-01,17.2\n1,2026-03-02,21.5\n2,2026-03-03,14.0\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Daily Max Wind Speed 💨",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "max_wind"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 14,
+      "panels": [],
+      "title": "When to Go Outside Today? 🚶",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "description": "Temperature curve for today. The warmest window is typically mid-afternoon — ideal for outdoor plans.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 18,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "temperature"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Temperature"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",timestamp,temperature\n0,2026-03-01 05:00:00,6\n1,2026-03-01 06:00:00,6\n2,2026-03-01 07:00:00,6\n3,2026-03-01 08:00:00,5\n4,2026-03-01 09:00:00,6\n5,2026-03-01 10:00:00,10\n6,2026-03-01 11:00:00,13\n7,2026-03-01 12:00:00,15\n8,2026-03-01 13:00:00,16\n9,2026-03-01 14:00:00,17\n10,2026-03-01 15:00:00,16\n11,2026-03-01 16:00:00,17\n12,2026-03-01 17:00:00,16\n13,2026-03-01 18:00:00,15\n14,2026-03-01 19:00:00,13\n15,2026-03-01 20:00:00,10\n16,2026-03-01 21:00:00,11\n17,2026-03-01 22:00:00,11\n18,2026-03-01 23:00:00,11\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Temperature Throughout Today 🌤",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "timestamp"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "temperature"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "description": "Hourly wind speed today. Green = calm, yellow = breezy, orange/red = avoid outdoor exposure.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 85,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "bar"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-orange",
+                "value": 20
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wind"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Wind Speed"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 16,
+      "options": {
+        "barRadius": 0.15,
+        "barWidth": 0.65,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "hour",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",hour,wind\n0,05:00,2.77\n1,06:00,4.84\n2,07:00,5.21\n3,08:00,4.24\n4,09:00,3.04\n5,10:00,3.48\n6,11:00,8.6\n7,12:00,7.04\n8,13:00,10.65\n9,14:00,11.93\n10,15:00,10.46\n11,16:00,13.03\n12,17:00,17.17\n13,18:00,12.54\n14,19:00,3.42\n15,20:00,3.78\n16,21:00,13.17\n17,22:00,10.55\n18,23:00,14.35\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Wind Speed by Hour 💨",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "wind"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "efeoa24y92w3kc"
+      },
+      "description": "Relative humidity today. Lighter bars = drier and more comfortable outdoors. Above 80% feels muggy.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-blues"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 85,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "relative_humidity"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Humidity"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 17,
+      "options": {
+        "barRadius": 0.15,
+        "barWidth": 0.65,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "hour",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.4.0",
+      "targets": [
+        {
+          "columns": [],
+          "data": ",hour,relative_humidity\n0,05:00,94.82\n1,06:00,92.83\n2,07:00,94.11\n3,08:00,94.16\n4,09:00,88.99\n5,10:00,68.53\n6,11:00,53.64\n7,12:00,48.54\n8,13:00,43.45\n9,14:00,43.75\n10,15:00,50.02\n11,16:00,42.23\n12,17:00,46.31\n13,18:00,51.52\n14,19:00,64.49\n15,20:00,71.81\n16,21:00,67.46\n17,22:00,71.97\n18,23:00,70.27\n",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "efeoa24y92w3kc"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "",
+          "source": "inline",
+          "type": "csv",
+          "url": "",
+          "url_options": {
+            "data": "",
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Relative Humidity by Hour 💧",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "relative_humidity"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "barchart"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2026-03-01T05:00:00.000Z",
+    "to": "2026-03-01T23:00:00.000Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "WeatherDataGaliza Dashboard Copy",
+  "uid": "adjcrjm",
+  "version": 1,
+  "weekStart": ""
+}
